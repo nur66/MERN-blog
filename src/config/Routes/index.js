@@ -4,13 +4,13 @@ import {
     Routes,
     Route,
   } from "react-router-dom";
-import { Home, Login, Register } from '../../pages';
+import { Login, MainApp, Register } from '../../pages';
 
 const BaseRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="*" element={<MainApp />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>
