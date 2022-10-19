@@ -1,6 +1,6 @@
 .main-page {
     display: flex;
-    height: 100%;
+    height: 100vh; // vh adalah viewport height, agar tidak bisa di scroll
     box-sizing: border-box;
 }
 
@@ -10,7 +10,6 @@
     height: 100%;
     .bg-image {
         width: 100%;
-        height: 100%;
         object-fit: cover;
     }
 }
@@ -18,7 +17,6 @@
 .right {
     width: 460px;
     background-color: white;
-    height: 100%;
     padding: 30px;
 
     // Membuatnya ketengah
