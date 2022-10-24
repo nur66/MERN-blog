@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BlogItem, Button, Gap } from '../../component';
 import './home.scss';
 import { useNavigate } from "react-router-dom";
+import Axios from 'axios';
 
 const Home = () => {
+  const [dataBlog, setDataBlog] = useState([]);
+
+  useEffect(() => {
+      Axios.get('http://localhost:5000/v1/blog/posts?page=1&perPage=5')
+      .then(result => {
+        console.log('Data api : ', result.data);
+        const responApi = result.data;
+
+        setDataBlog(responApi.data);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }, []);
+
   const navigate = useNavigate();
   return (
     <div className='home-page-wrapper'>
@@ -12,10 +28,20 @@ const Home = () => {
         </div>
         <Gap height={20} />
         <div className='content-wrapper'>
+            {dataBlog.map(blog => {
+              return <BlogItem 
+                key={blog._id} 
+                image={`http://localhost:5000/${blog.image}`} 
+                title={blog.title}
+                body={blog.body}
+                name={blog.author.name}
+                date={blog.createdAt}
+              />
+            })}
+            {/* <BlogItem />
             <BlogItem />
             <BlogItem />
-            <BlogItem />
-            <BlogItem />
+            <BlogItem /> */}
         </div>
         <div className='pagination'>
             <Button title='Previous' />
