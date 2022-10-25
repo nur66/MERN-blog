@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { BlogItem, Button, Gap } from '../../component';
 import './home.scss';
 import { useNavigate } from "react-router-dom";
-import Axios from 'axios';
+// import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
+import { setDataBlog } from '../../config/redux/action';
 
 const Home = () => {
   const {dataBlog} = useSelector(state => state.homeReducer);
@@ -11,16 +12,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-
-      Axios.get('http://localhost:5000/v1/blog/posts?page=1&perPage=5')
-      .then(result => {
-        const responApi = result.data;
-
-        dispatch({type: 'UPDATE_DATA_BLOG', payload: responApi.data});
-      })
-      .catch(error => {
-        console.log(error);
-      })
+      dispatch(setDataBlog())
   }, [dispatch]);
 
   const navigate = useNavigate();
